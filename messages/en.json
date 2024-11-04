@@ -1,5 +1,14 @@
 {
-    "title": "Hello world!"
+    "title": "Hello world!",
+    "Home": "Home",
+    "About us": "About us",
+    "FAQ": "FAQ",
+    "Guide": "Guide",
+    "Contact": "Contact",
+    "navbar": {
+        "Language":"English",
+        "Bangla":"Bangla"
+    }
 }
 
   
