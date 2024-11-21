@@ -8,21 +8,23 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 import { LingoSwitcher } from "./lingo-switcher";
 
+
 export const Navbar = () => {
   const t = useTranslations();
-  const pathname=usePathname();
-  const [isBorder, setBorder]=useState(false);
-  useEffect(()=>{
-    if(pathname==="/"){
+  const pathname = usePathname();
+  const [isBorder, setBorder] = useState(false);
+  useEffect(() => {
+    if (pathname === "/") {
       setBorder(false);
     }
-    else{
+    else {
       setBorder(true);
     }
-  },[pathname]);
+  }, [pathname]);
 
   const routes = [
     {
@@ -47,20 +49,20 @@ export const Navbar = () => {
     }
   ];
   return (
-    <div className={cn(`fix top-0 right-0 left-0 z-20 flex w-full justify-around h-24 py-0.5 items-center`,
-      isBorder? "border-b shadow-md": ""
-     )}>
-      <div className="lg:hidden block">
-        manubar
+    <div className={cn(`fix top-0 right-0 left-0 z-20 flex w-full justify-around md:h-24 sm:h-20 h-16 items-center `,
+      isBorder ? "border-b shadow-md" : ""
+    )}>
+      <div className="lg:hidden flex">
+        <GiHamburgerMenu className="size-6 text-neutral-700" />
       </div>
-      <div className="relative h-full w-60 flex justify-center items-center">
+      <div className="relative h-full w-60 flex justify-center items-center ">
         <Link href="/">
-        <Image
-          className="object-fill h-full w-44"
-          src="/20221205130621.svg"
-          alt="logo"
-          height="100"
-          width="150"
+          <Image
+            className="object-fill h-full w-44"
+            src="/20221205130621.svg"
+            alt="logo"
+            height="100"
+            width="150"
           />
         </Link>
       </div>
@@ -79,7 +81,7 @@ export const Navbar = () => {
         </div>
         <div className="flex gap-4">
           <Link href="/user/account/notifications"><FaBell className="size-6" /></Link>
-          <Link href="#"><GoPersonFill className="size-6"/></Link>
+          <Link href="#"><GoPersonFill className="size-6" /></Link>
         </div>
       </div>
     </div>
