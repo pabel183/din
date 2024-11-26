@@ -1,28 +1,20 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
-import { Search } from "lucide-react";
 import { useState } from "react"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Search, X } from "lucide-react";
+import { useForm } from "react-hook-form"
 import { cn } from "@/lib/utils"
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
+import { Button } from "@/components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
+import { AddressMenuContent } from "./address-menu-content";
+import { genderData, maritalstatusData } from "./addressInfo";
+
 const formSchema = z.object({
     gendername: z.string(),
     maritalstatus: z.string(),
@@ -33,24 +25,12 @@ export const BiodataSearchForm = () => {
     const [isLooking, setIsLooking] = useState(false);
     const [isMaritalStatus, setIsMaritalStatus] = useState(false);
     const [isParmanentAddress, setIsParmanentAddress] = useState(false);
+    const [isAddressLebel, setIsAddressLebel] = useState<string>("Bangladesh");
+    const [isAddressArea, setIsAddressArea] = useState<string>("country");
+    const [isDivision, setDivision] = useState<string>();
+    const [isDistrict, setdDistrict] = useState<string>();
+    const [isMenuTriggerDisable, setMenuTriggerDisable] = useState<boolean>(false);
 
-
-    const genderData = [
-        { value: "All", label: "All" },
-        { value: "Male's Biodata", label: "Male's Biodata" },
-        { value: "Female's Biodata", label: "Female's Biodata" }
-    ];
-
-    const maritalstatusData = [
-        { value: "All", label: "All" },
-        { value: "Never Married", label: "Never Married" },
-        { value: "Married", label: "Married" },
-        { value: "Divorced", label: "Divorced" },
-        { value: "Widow", label: "Widow" },
-        { value: "Widower", label: "Widower" }
-    ]
-
-    // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -60,20 +40,28 @@ export const BiodataSearchForm = () => {
         },
     })
 
-    // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
-        // ✅ This will be type-safe and validated.
+        // This will be type-safe and validated.
         console.log(values)
+    }
+
+    function reset() {
+        setIsParmanentAddress(false);
+        setIsAddressLebel("Bangladesh");
+        setIsAddressArea("country");
+        setDivision(undefined);
+        setdDistrict(undefined);
+        setMenuTriggerDisable(false);
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="relative w-full">
                 <div className="
-        w-full flex flex-col lg:flex-row p-8 md:p-12
-        bg-[#ffffff] drop-shadow rounded-2xl justify-between gap-8 items-center
-        ">
+                w-full flex flex-col lg:flex-row p-8 md:p-12
+                bg-[#ffffff] drop-shadow rounded-2xl justify-between gap-8 items-center
+                ">
                     <div className="flex w-full flex-col lg:flex-row justify-between gap-8 items-stretch">
                         {/* FieldItem */}
                         <div className="w-full flex flex-col">
@@ -87,7 +75,7 @@ export const BiodataSearchForm = () => {
                                         </FormLabel>
                                         <Select
                                             open={isLooking}
-                                            onValueChange={field.onChange}
+                                            onValueChange={(value) => field.onChange(value)}
                                             defaultValue={field.value}
                                             onOpenChange={() => setIsLooking((preValue) => !preValue)}
                                         >
@@ -96,7 +84,8 @@ export const BiodataSearchForm = () => {
                                                     className={cn("py-7 ring-0 focus:ring-offset-0 focus:ring-0",
                                                         isLooking && "rounded-b-none border-b-0"
                                                     )}
-                                                    defaultIcon={false}>
+                                                    defaultIcon={false}
+                                                >
                                                     <div className=" w-full flex justify-between items-center text-base text-neutral-600 border-[#7c838e]">
                                                         <p>{field.value}</p>
                                                         {isLooking ? <MdArrowDropUp /> : <MdArrowDropDown />}
@@ -107,9 +96,12 @@ export const BiodataSearchForm = () => {
                                                 position="popper"
                                                 sideOffset={-8}
                                                 className="z-0 rounded-t-none border-t-0 w-[--radix-select-trigger-width]"
-                                            >{genderData.map((data) => (
-                                                <SelectItem key={data.label} className="text-[#b9b1b5]" value={data.value}>{data.label}</SelectItem>
-                                            ))}
+                                            >
+                                                <div>
+                                                    {genderData.map((data) => (
+                                                        <SelectItem key={data.label} className="text-[#b9b1b5]" value={data.value}>{data.label}</SelectItem>
+                                                    ))}
+                                                </div>
                                             </SelectContent>
                                         </Select>
                                     </FormItem>
@@ -134,14 +126,19 @@ export const BiodataSearchForm = () => {
                                             <FormControl>
                                                 <SelectTrigger
                                                     className="py-7 ring-0 focus:ring-offset-0 focus:ring-0"
-                                                    defaultIcon={false}>
+                                                    defaultIcon={false}
+                                                >
                                                     <div className="w-full flex justify-between items-center text-base text-neutral-600 border-[#7c838e]">
                                                         <p>{field.value}</p>
                                                         {isMaritalStatus ? <MdArrowDropUp /> : <MdArrowDropDown />}
                                                     </div>
                                                 </SelectTrigger>
                                             </FormControl>
-                                            <SelectContent>
+                                            <SelectContent
+                                                position="popper"
+                                                sideOffset={-8}
+                                                className="z-0 rounded-t-none border-t-0 w-[--radix-select-trigger-width]"
+                                            >
                                                 {maritalstatusData.map((data) => (
                                                     <SelectItem key={data.label} className="text-[#b9b1b5]" value={data.value}>{data.label}</SelectItem>
                                                 ))}
@@ -160,27 +157,48 @@ export const BiodataSearchForm = () => {
                                         <FormLabel>
                                             <h3 className="text-lg text-[#58376b]">Permanent Address</h3>
                                         </FormLabel>
-                                        <Select
+                                        <DropdownMenu
+                                            modal={false}
                                             open={isParmanentAddress}
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
                                             onOpenChange={() => setIsParmanentAddress((preValue) => !preValue)}
                                         >
                                             <FormControl>
-                                                <SelectTrigger
-                                                    className="py-7 ring-0 focus:ring-offset-0 focus:ring-0"
-                                                    defaultIcon={false}>
-                                                    <div className="w-full flex justify-between items-center text-base text-neutral-600 border-[#7c838e]">
+                                                <DropdownMenuTrigger
+                                                    className={cn(
+                                                        `flex h-10 w-full items-center justify-between
+                                                         rounded-md px-3 py-7 ring-0 focus:ring-offset-0 
+                                                         focus:ring-0 text-base text-neutral-600 border`,
+                                                    )}
+                                                    asChild
+                                                    disabled={isMenuTriggerDisable}
+                                                >
+                                                    <div className="w-full  flex justify-between items-center">
                                                         <p>{field.value || "Select an address"}</p>
-                                                        {isParmanentAddress ? <MdArrowDropUp /> : <MdArrowDropDown />}
+                                                        {field.value === "" ? <MdArrowDropUp /> : <X onClick={() => { field.onChange(""); reset() }} />}
                                                     </div>
-                                                </SelectTrigger>
+                                                </DropdownMenuTrigger>
                                             </FormControl>
-                                            <SelectContent>
-                                                <SelectItem value="m@example.com">m@example.com</SelectItem>
-                                                <SelectItem value="m@google.com">m@google.com</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                            <DropdownMenuContent
+                                                avoidCollisions={false}
+                                                sideOffset={0}
+                                                className="h-64 w-[--radix-dropdown-menu-trigger-width] -translate-y-14"
+                                            // className="h-64 translate-x-0 -translate-y-14 w-[--radix-dropdown-menu-trigger-width]"
+                                            >
+                                                <AddressMenuContent
+                                                    onChangeVelue={(value) => field.onChange(value)}
+                                                    isAddressLebel={isAddressLebel}
+                                                    setIsAddressLebel={(value) => setIsAddressLebel(value)}
+                                                    isAddressArea={isAddressArea}
+                                                    setIsAddressArea={(value) => setIsAddressArea(value)}
+                                                    setIsParmanentAddress={() => setIsParmanentAddress((preValue) => !preValue)}
+                                                    isDivision={isDivision}
+                                                    setDivision={(value) => setDivision(value)}
+                                                    isDistrict={isDistrict}
+                                                    setdDistrict={(value) => setdDistrict(value)}
+                                                    setMenuTriggerDisable={(value)=>setMenuTriggerDisable(value)}
+                                                />
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
                                     </FormItem>
                                 )}
                             />
@@ -195,7 +213,7 @@ export const BiodataSearchForm = () => {
                         </Button>
                     </div>
                 </div>
-            </form>
-        </Form>
+            </form >
+        </Form >
     );
 }
