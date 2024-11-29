@@ -26,7 +26,10 @@ export const LingoSwitcher: React.FC<LingoSwitcherProps> = ({
         <div className="w-fit z-20">
             <HoverCard openDelay={100}>
                 <HoverCardTrigger >
-                    <div className="cursor-pointer flex w-fit items-center text-sm font-medium text-[#483285]">
+                    <div className={cn("cursor-pointer flex w-fit items-center text-sm font-medium ",
+                        sidebarDropDownMenuIsOpen ? "text-neutral-600 text-md font-medium" :
+                            (isHoverOnEnglish && "text-[#483285]"),
+                    )}>
                         <IoLanguage className="size-6 " />
                         <h3>{t("Language")}</h3>
                         <ChevronDown className="size-6 pt-1" />
@@ -45,7 +48,10 @@ export const LingoSwitcher: React.FC<LingoSwitcherProps> = ({
                         sidebarDropDownMenuIsOpen && "justify-between p-4 pt-8 gap-6"
                     )}>
                         <Button
-                            className={cn("h-6 justify-start", isHoverOnEnglish ? "text-[#371a52]" : "text-[#483285]")}
+                            className={cn("h-6 justify-start",
+                                sidebarDropDownMenuIsOpen ? "text-neutral-600 text-md font-medium" :
+                                    (isHoverOnEnglish ? "text-[#371a52]" : "text-[#483285]"),
+                            )}
                             variant="ghost"
                             size="sm"
                             onClick={() => useLanguage("en")}
@@ -53,7 +59,10 @@ export const LingoSwitcher: React.FC<LingoSwitcherProps> = ({
                             onMouseLeave={() => setIsHoverOnEnglish(false)}
                         >English</Button>
                         <Button
-                            className={cn("h-6 justify-start", isHoverOnBangla ? "text-[#371a52]" : "text-[#483285]")}
+                            className={cn("h-6 justify-start",
+                                sidebarDropDownMenuIsOpen ? "text-neutral-600 text-md font-medium" :
+                                    (isHoverOnEnglish ? "text-[#371a52]" : "text-[#483285]"),
+                            )}
                             variant="ghost"
                             size="sm"
                             onClick={() => useLanguage("bn")}

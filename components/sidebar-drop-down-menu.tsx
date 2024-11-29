@@ -46,11 +46,11 @@ export const SidebarDropDownMenu = () => {
             path: "/contact"
         }
     ];
-    const [open,setOpen]=useState(false);
+    const [open, setOpen] = useState(false);
 
     return (
         <>
-            <DropdownMenu open={open} onOpenChange={()=>setOpen((preValue)=>!preValue)} modal={false}>
+            <DropdownMenu open={open} onOpenChange={() => setOpen((preValue) => !preValue)} modal={false}>
                 <DropdownMenuTrigger>
                     <GiHamburgerMenu className="size-6 text-neutral-700" />
                 </DropdownMenuTrigger>
@@ -59,7 +59,7 @@ export const SidebarDropDownMenu = () => {
                     side="bottom"
                     asChild
                 >
-                    <div className="w-full p-8 h-[40rem] relative flex flex-col justify-start gap-8">
+                    <div className="w-52 p-8 h-[40rem] relative flex flex-col justify-start gap-8">
                         <div className=" flex flex-col justify-start gap-8">
                             {routes.map((route) => (
                                 <Link
@@ -71,8 +71,8 @@ export const SidebarDropDownMenu = () => {
                         </div>
                         <div className="w-full relative flex gap-4 text-[#522c79]">
                             <div className="w-full flex pt-1">
-                                <LingoSwitcher 
-                                sidebarDropDownMenuIsOpen={true}
+                                <LingoSwitcher
+                                    sidebarDropDownMenuIsOpen={true}
                                 />
                             </div>
                         </div>
