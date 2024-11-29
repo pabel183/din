@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { LingoSwitcher } from "./lingo-switcher";
-
+import { SidebarDropDownMenu } from "./sidebar-drop-down-menu";
 
 export const Navbar = () => {
   const t = useTranslations();
@@ -53,7 +53,7 @@ export const Navbar = () => {
       isBorder ? "border-b shadow-md" : ""
     )}>
       <div className="lg:hidden flex">
-        <GiHamburgerMenu className="size-6 text-neutral-700" />
+        <SidebarDropDownMenu />
       </div>
       <div className="relative h-full w-60 flex justify-center items-center ">
         <Link href="/">

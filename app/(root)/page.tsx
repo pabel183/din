@@ -64,11 +64,11 @@ const HomePage = () => {
 
             <div className="
             flex flex-col text-center justify-between items-center gap-8 transition ease-in-out
-            max-w-sm  sm:max-w-lg md:max-w-2xl lg:max-w-6xl text-[#522c79]
+            max-w-sm  sm:max-w-lg md:max-w-2xl lg:max-w-7xl text-[#522c79]
             ">
                 <h2 className="
-                    text-3xl lg:text-5xl font-semibold lg:font-bold
-                    "><span className="text-[#e92f83]">Create biodata</span> in OrdhekDeen completely free of coast
+                    text-3xl lg:text-5xl font-semibold lg:font-bold tracking-tight
+                    "><span className="text-[#e92f83]">Create biodata</span> in OrdhekDeen completely free of cost
                 </h2>
                 <BiodataCreationButton />
             </div>
@@ -82,7 +82,7 @@ const HomePage = () => {
                     "><span className="text-[#e92f83]">OrdhekDheen</span> User Statistics
                     </h2>
                 </div>
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between items-stretch gap-8 px-8 md:px-16">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between items-stretch gap-8 px-8 md:px-28">
                     <UserStatistics
                         className="h-20 w-36"
                         imageSource="/couple.svg"
@@ -119,7 +119,7 @@ const HomePage = () => {
                     "><span className="text-[#e92f83]">How</span> OrdhekDeen Works
                     </h2>
                 </div>
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between items-stretch gap-8 px-8 md:px-16">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between items-stretch gap-8 px-8 md:px-28">
                     <WorkGuideline
                         imageSource="/hiw-create-biodata.svg"
                         title="Create Biodata"

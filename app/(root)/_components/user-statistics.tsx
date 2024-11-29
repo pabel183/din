@@ -19,10 +19,10 @@ export const UserStatistics: React.FC<UserStatisticsProps> = ({
 }) => {
     return (
         <div className="flex-grow col-span-1 ">
-            <Card className="flex flex-col h-full w-full 
+            <Card className="flex flex-col h-full w-full
             shadow-neutral-200 shadow-lg rounded-3xl border-none  bg-gradient-to-b from-[#fef5f8] to-[#fefefe] ">
                 <div className="pt-14 pb-4 w-full text-center">
-                    <CardContent className="px-0 ">
+                    <CardContent className="p-0 pb-4">
                         <div className="flex flex-col justify-between items-center gap-8">
                             <Image
                                 className={cn(`${className}`)}

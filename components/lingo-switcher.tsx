@@ -11,10 +11,16 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-export const LingoSwitcher = () => {
+interface LingoSwitcherProps {
+    sidebarDropDownMenuIsOpen?: boolean;
+}
+
+export const LingoSwitcher: React.FC<LingoSwitcherProps> = ({
+    sidebarDropDownMenuIsOpen = false,
+}) => {
     const t = useTranslations("navbar");
-    const [isHoverOnBangla, setIsHoverOnBangla]=useState(false);
-    const [isHoverOnEnglish, setIsHoverOnEnglish]=useState(false);
+    const [isHoverOnBangla, setIsHoverOnBangla] = useState(false);
+    const [isHoverOnEnglish, setIsHoverOnEnglish] = useState(false);
 
     return (
         <div className="w-fit z-20">
@@ -27,29 +33,33 @@ export const LingoSwitcher = () => {
                     </div>
                 </HoverCardTrigger>
                 <HoverCardContent
-                    className="p-0 w-28"
+                    className={cn("p-0 w-28 rounded-sm",
+                        sidebarDropDownMenuIsOpen && "w-52 border-none shadow-none"
+                    )}
                     asChild
                     side="bottom"
-                    sideOffset={30}
+                    sideOffset={sidebarDropDownMenuIsOpen ? 0 : 30}
                     align="end"
                 >
-                    <div className="flex flex-col justify-start py-4 ">
+                    <div className={cn("flex flex-col justify-start py-4 ",
+                        sidebarDropDownMenuIsOpen && "justify-between p-4 pt-8 gap-6"
+                    )}>
                         <Button
-                        className={cn("h-6 justify-start",  isHoverOnEnglish? "text-[#371a52]" : "text-[#483285]" )}
+                            className={cn("h-6 justify-start", isHoverOnEnglish ? "text-[#371a52]" : "text-[#483285]")}
                             variant="ghost"
                             size="sm"
                             onClick={() => useLanguage("en")}
                             onMouseEnter={() => setIsHoverOnEnglish(true)}
-                             onMouseLeave={() => setIsHoverOnEnglish(false)}
-                            >English</Button>
+                            onMouseLeave={() => setIsHoverOnEnglish(false)}
+                        >English</Button>
                         <Button
-                        className={cn("h-6 justify-start", isHoverOnBangla? "text-[#371a52]" : "text-[#483285]" )}
+                            className={cn("h-6 justify-start", isHoverOnBangla ? "text-[#371a52]" : "text-[#483285]")}
                             variant="ghost"
                             size="sm"
                             onClick={() => useLanguage("bn")}
                             onMouseEnter={() => setIsHoverOnBangla(true)}
                             onMouseLeave={() => setIsHoverOnBangla(false)}
-                            >{t("Bangla")}</Button>
+                        >{t("Bangla")}</Button>
                     </div>
                 </HoverCardContent>
             </HoverCard>

@@ -1,7 +1,7 @@
 "use client";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { X } from "lucide-react";
+import { ImCross } from "react-icons/im";
 import { Separator } from "@/components/ui/separator";
 
 import { AddressInfor } from "./addressInfo";
@@ -68,20 +68,20 @@ export const AddressMenuContent: React.FC<AddressMenuContentProps> = ({
 
     return (
         <div className=" p-2 w-full flex flex-col justify-start items-center">
-            <div className="py-2 w-full flex justify-between">
+            <div className="py-2 w-full flex justify-between items-center text-base font-bold text-neutral-400">
                 {isAddressArea !== "country" &&
                     <IoMdArrowRoundBack onClick={handleBack} />
                 }
                 <h3>Select a {isAddressArea}</h3>
                 {isAddressArea === "country" &&
-                    <X onClick={setIsParmanentAddress} />
+                    <ImCross className="size-[0.65rem]" onClick={setIsParmanentAddress} />
                 }
             </div>
             <Separator />
-            <div className="py-2 w-full flex justify-between cursor-pointer">
+            <div className="py-2 w-full flex justify-between cursor-pointer text-sm text-[#a29d98]">
                 <ScrollArea className="w-full h-40">
                     {isAddressArea === "country" &&
-                        <div onClick={handleClick} className="w-full pt-4 flex justify-between items-center">
+                        <div onClick={handleClick} className="w-full p-2 flex justify-between items-center hover:bg-neutral-100">
                             <p>{isAddressLebel}</p>
                             <IoIosArrowForward />
                         </div>
@@ -94,11 +94,11 @@ export const AddressMenuContent: React.FC<AddressMenuContentProps> = ({
                                     <IoIosArrowForward />
                                 </div>
                             </DropdownMenuItem>
-                            <ul className="w-full flex flex-col justify-between items-start">
+                            <ul className="w-full flex flex-col justify-around items-start gap-1">
                                 {
                                     AddressInfor?.Details.map((division, index) => (
                                         <li
-                                            className="w-full px-2 flex justify-between hover:bg-neutral-300"
+                                            className="w-full px-2 py-1 flex justify-between hover:bg-neutral-100"
                                             onClick={() => {
                                                 handleClick();
                                                 setDivision(division.name);
@@ -121,11 +121,11 @@ export const AddressMenuContent: React.FC<AddressMenuContentProps> = ({
                                     <IoIosArrowForward />
                                 </div>
                             </DropdownMenuItem>
-                            <ul className="w-full flex flex-col justify-between items-start">
+                            <ul className="w-full flex flex-col justify-around gap-1 items-start">
                                 {
                                     AddressInfor.Details.find((division) => division.name === isDivision)?.Details.map((District, index) => (
                                         <li
-                                            className="w-full px-2 flex justify-between hover:bg-neutral-300"
+                                            className="w-full px-2 py-1 flex justify-between hover:bg-neutral-100"
                                             onClick={() => {
                                                 handleClick();
                                                 setdDistrict(District.name);
