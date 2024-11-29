@@ -52,7 +52,7 @@ export const Navbar = () => {
     <div className={cn(`fix top-0 right-0 left-0 z-20 flex w-full justify-around md:h-24 sm:h-20 h-16 items-center `,
       isBorder ? "border-b shadow-md" : ""
     )}>
-      <div className="lg:hidden flex">
+      <div className="lg:hidden relative flex">
         <SidebarDropDownMenu />
       </div>
       <div className="relative h-full w-60 flex justify-center items-center ">

@@ -55,14 +55,11 @@ export const SidebarDropDownMenu = () => {
                     <GiHamburgerMenu className="size-6 text-neutral-700" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                
-                    className={cn(`absolute left-0 top-4 w-52 rounded-none lg:hidden
-                    transition-transform ease-out duration-[50000ms]
-                    `,)}
+                    className="absolute left-0 top-6 w-52 rounded-none lg:hidden"
                     side="bottom"
                     asChild
                 >
-                    <div className="w-full pl-4 pt-4 h-[40rem] relative flex flex-col justify-start gap-8">
+                    <div className="w-full p-8 h-[40rem] relative flex flex-col justify-start gap-8">
                         <div className=" flex flex-col justify-start gap-8">
                             {routes.map((route) => (
                                 <Link
