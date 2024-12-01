@@ -1,6 +1,5 @@
 "use client";
 
-import { GoPersonFill } from "react-icons/go";
 import { FaBell } from "react-icons/fa6";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -8,7 +7,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { GiHamburgerMenu } from "react-icons/gi";
+import {ProfileMenu} from "./profileMenu";
 
 import { LingoSwitcher } from "./lingo-switcher";
 import { SidebarDropDownMenu } from "./sidebar-drop-down-menu";
@@ -81,7 +80,7 @@ export const Navbar = () => {
         </div>
         <div className="flex gap-4">
           <Link href="/user/account/notifications"><FaBell className="size-6" /></Link>
-          <Link href="#"><GoPersonFill className="size-6" /></Link>
+          <ProfileMenu />
         </div>
       </div>
     </div>
