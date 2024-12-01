@@ -94,7 +94,7 @@ export const ProfileMenu = () => {
                                 </Button>
                             </div>
                         </div>
-                        <div><ul className="w-full flex flex-col justify-between items-start gap-4">
+                        <div className="w-full"><ul className="w-full flex flex-col justify-between items-start gap-4">
                             {
                                 routes.map((data) => (
                                     data.name === "logout" ?
@@ -112,7 +112,7 @@ export const ProfileMenu = () => {
                                             <p className="text-[#7c838e]">{data.name}</p>
                                         </li>
                                         ) :
-                                        (<Link href={data.route}>
+                                        (<Link className="w-full px-0" href={data.route}>
                                             <li
                                             className="w-full grayscale hover:grayscale-0 text-gray-400 hover:text-[#522c79]  flex justify-start items-center gap-4"
                                             key={data.name}>
